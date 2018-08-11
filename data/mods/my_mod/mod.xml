@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mod>
+    <name>Tutorial Mod</name>
+    <description>Adds a recipe for un-smelting iron.</description>
+    <author>Your Name Here</author>
+    <version>0.1.0</version>
+    <init>
+      <include id="structures/crafting.xml" />
+    </init>
+</mod>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<recipes>
+  <recipe id="unsmelt_iron" creates="iron" count="2" type="smelter">
+    <item id="iron_bar"/>
+  </recipe>
+</recipes>
