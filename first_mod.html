@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Your First Mod &mdash; Aground Modding Tutorial 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Getting Started" href="get_started.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Aground Modding Tutorial
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="get_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Your First Mod</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quickie-how-to-read-paths">Quickie: how to read paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-a-minimal-mod">Setting up a minimal mod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reading-and-modding-xml-the-basics">Reading and modding XML (the basics)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing-mod-xml-and-launching-your-mod">Customizing mod.xml and launching your mod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-a-recipe">Adding a recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#making-the-mod-do-something">Making the mod do something</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Aground Modding Tutorial</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Your First Mod</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/first_mod.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="your-first-mod">
+<h1>Your First Mod<a class="headerlink" href="#your-first-mod" title="Permalink to this headline">¶</a></h1>
+<p>We’re going to make something simple for our first–how about turning a bar
+of iron back into ore? This means we’ll need to add a recipe and decide where
+recipe is available (how about the smelter?). Please note that the length of
+this guide doesn’t reflect the difficulty of modding Aground! Modding itself is
+easy, but there is some starter knowledge required (like how to read XML), which
+I cover.</p>
+<div class="section" id="quickie-how-to-read-paths">
+<h2>Quickie: how to read paths<a class="headerlink" href="#quickie-how-to-read-paths" title="Permalink to this headline">¶</a></h2>
+<p>A path is the sequence of folders you need to go through to reach some
+destination (like a file). Each folder is separated by / (on Windows).
+For example, if you’re starting from the Aground folder we found through Steam,
+the path to the adult dragon’s art file is <code class="code docutils literal notranslate"><span class="pre">data/core/enemies/adult_dragon.png</span></code>.
+In this example, we first go to the “data” folder, then the folder named “core” inside it,
+then the folder named “enemies” inside <em>that</em>. The file we’re after is found there,
+and is named “adult_dragon.png”. Meanwhile the path to the “enemies” folder is
+<code class="code docutils literal notranslate"><span class="pre">data/core/enemies</span></code>.</p>
+<p>I’ll try to always give paths relative to the Aground root folder (again,
+the one we found through Steam). Make sure you can read and follow paths, as
+they’re used extensively in this guide.</p>
+</div>
+<div class="section" id="setting-up-a-minimal-mod">
+<h2>Setting up a minimal mod<a class="headerlink" href="#setting-up-a-minimal-mod" title="Permalink to this headline">¶</a></h2>
+<p>Each mod consists of a minimum of two things: a folder to contain it, and a mod.xml
+to describe it. Go ahead and create a new folder in <code class="code docutils literal notranslate"><span class="pre">data/mods/</span></code> and give it
+a name (what about “my_mod”?). Now we just need to create the mod xml. While we
+could type it by hand, there’s one we could use–copy <code class="code docutils literal notranslate"><span class="pre">data/mods/full/mod.xml</span></code>
+and paste it into our own folder, making <code class="code docutils literal notranslate"><span class="pre">data/mods/my_mod/mod.xml</span></code>. Open it:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+<span class="nt">&lt;mod&gt;</span>
+    <span class="nt">&lt;name&gt;</span>Full Version<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;description&gt;</span>Expands the core game into the full version.<span class="nt">&lt;/description&gt;</span>
+    <span class="nt">&lt;author&gt;</span>Fancy Fish Games<span class="nt">&lt;/author&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.4.0<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;website&gt;</span>http://fancyfishgames.com/Aground/<span class="nt">&lt;/website&gt;</span>
+  <span class="nt">&lt;disableWarning&gt;</span>This will disable all new islands and features after the demo of the game.<span class="nt">&lt;/disableWarning&gt;</span>
+    <span class="nt">&lt;init&gt;</span>
+        <span class="nt">&lt;include</span> <span class="na">id=</span><span class="s">&quot;music/music.xml&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;include</span> <span class="na">id=</span><span class="s">&quot;achievements.xml&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;include</span> <span class="na">id=</span><span class="s">&quot;items/items.xml&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;include</span> <span class="na">id=</span><span class="s">&quot;lang/languages.xml&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;include</span> <span class="na">id=</span><span class="s">&quot;vehicles/vehicles.xml&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;include</span> <span class="na">id=</span><span class="s">&quot;debris/debris.xml&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;include</span> <span class="na">id=</span><span class="s">&quot;structures/structures.xml&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;include</span> <span class="na">id=</span><span class="s">&quot;enemies/enemies.xml&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;include</span> <span class="na">id=</span><span class="s">&quot;science2/science2.xml&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;include</span> <span class="na">id=</span><span class="s">&quot;scenes/scenes.xml&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;include</span> <span class="na">id=</span><span class="s">&quot;npcs/npcs.xml&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;include</span> <span class="na">id=</span><span class="s">&quot;ships/ships.xml&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/init&gt;</span>
+<span class="nt">&lt;/mod&gt;</span>
+</pre></div>
+</div>
+<p>This isn’t in the form we need–it describes another mod. For now.</p>
+</div>
+<div class="section" id="reading-and-modding-xml-the-basics">
+<h2>Reading and modding XML (the basics)<a class="headerlink" href="#reading-and-modding-xml-the-basics" title="Permalink to this headline">¶</a></h2>
+<p>If you haven’t seen xml before, mod.xml might be a bit overwhelming, but it’s
+straightforward once you can recognize its structure. XML is made primarily
+of <strong>elements</strong>. Elements are started and ended by tags, or contained all within
+one (and ended by a backslash). Elements can contain other elements (their “children”),
+and thus be contained by tags (their “parents”), giving us a kind of hierarchy. It’s
+clearer with examples:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="code docutils literal notranslate"><span class="pre">&lt;name&gt;Full</span> <span class="pre">Version&lt;/name&gt;</span></code> is an <strong>element</strong>. See how it starts with the <strong>tag</strong> <code class="code docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> and ends with the same <strong>tag</strong>, but with a <code class="code docutils literal notranslate"><span class="pre">/</span></code> out front: <code class="code docutils literal notranslate"><span class="pre">&lt;/name&gt;</span></code></li>
+<li><code class="code docutils literal notranslate"><span class="pre">&lt;include</span> <span class="pre">id=&quot;items/items.xml&quot;</span> <span class="pre">/&gt;</span></code> is also an <strong>element</strong>. Notice that it’s all in the same pair of &lt;braces&gt;, but ends with a <code class="code docutils literal notranslate"><span class="pre">/</span></code>, just like name’s closing tag. It has a parent (init)</li>
+<li><code class="code docutils literal notranslate"><span class="pre">&lt;init&gt;</span> <span class="pre">...</span> <span class="pre">&lt;/init&gt;</span></code> is also an <strong>element</strong>. Elements can span multiple lines and contain other elements. The “include” elements are its children</li>
+<li><code class="code docutils literal notranslate"><span class="pre">&lt;mod&gt;</span> <span class="pre">...</span> <span class="pre">&lt;/mod&gt;</span></code> is a special type of <strong>element</strong>: a <strong>root element</strong>. Mod is the parent of all other elements in this xml</li>
+</ul>
+</div></blockquote>
+<p>We need to change this file to suit us, and we can reason about what we do and
+don’t need based on the names of the elements:</p>
+<ul class="simple">
+<li><strong>mod</strong>: the root element. Since it contains everything else, we assume it defines how everything else should be read by the game. We definitely need this.</li>
+<li><strong>name</strong>: This is how the game knows what our mod is called. Again, obviously necessary.</li>
+<li><strong>description</strong>, <strong>author</strong>, and <strong>version</strong>: Extra information that’s more for the user. It’s not immediately clear what here we need–I experimented, and it seems <strong>author</strong> and <strong>description</strong> are mandatory, <strong>version</strong> is optional (still use it!).</li>
+<li><strong>website</strong>: The author’s personal website. Seems optional, and is.</li>
+<li><strong>disableWarning</strong>: Sounds like a warning that pops up if the mod is disabled. Disabling our mod won’t do anything strange (we’re only adding a recipe), so we don’t need this.</li>
+<li><strong>init</strong>: “Init” (short for “initialize”?) seems like it includes instructions on how to <em>initialize</em> the mod. Since a mod has to be initialized to do anything, necessary.</li>
+<li><strong>include</strong>: While we’ll definitely need to <strong>include</strong> things in our mod for it to do anything useful, we don’t yet have anything to include; we can remove this.</li>
+</ul>
+<p>Reasoning based on element names is foundational to modding Aground. The
+devs did a great job choosing names for things, so apart from the occasional
+oddity (version is optional, author is not), the process is nice and logical.</p>
+</div>
+<div class="section" id="customizing-mod-xml-and-launching-your-mod">
+<h2>Customizing mod.xml and launching your mod<a class="headerlink" href="#customizing-mod-xml-and-launching-your-mod" title="Permalink to this headline">¶</a></h2>
+<p>It’s time to tweak <code class="code docutils literal notranslate"><span class="pre">data/mods/my_mod/mod.xml</span></code> until it’s in the form you want.
+Mine would look like:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+<span class="nt">&lt;mod&gt;</span>
+    <span class="nt">&lt;name&gt;</span>Tutorial Mod<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;description&gt;</span>Adds a recipe for un-smelting iron.<span class="nt">&lt;/description&gt;</span>
+    <span class="nt">&lt;author&gt;</span>Your Name Here<span class="nt">&lt;/author&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.1.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;init&gt;&lt;/init&gt;</span>
+<span class="nt">&lt;/mod&gt;</span>
+</pre></div>
+</div>
+<p>(One thing we haven’t covered is the first line, “”&lt;?xml”…–don’t worry about it for now,
+just know you need to include that line in every xml document).</p>
+<p>Our mod doesn’t do anything, but it’s still a valid mod, so go ahead and launch the game!</p>
+<p>Once it’s up, go to the mods tab. You should see your mod there. If you don’t,
+there’s something wrong with its <em>structure</em>: make sure there’s two folders in
+the mods folder (“full” and “my_mod” or whatever you named it), and that “my_mod”
+contains a file named “mod.xml”. If you don’t see anything on hovering over your
+mod, there’s something wrong with the mod.xml itself–compare yours to my example
+and try again. There’s also xml parsers online to make sure your formatting’s alright.</p>
+<p>If it works, congratulations! You’ve just made your own valid mod!</p>
+</div>
+<div class="section" id="adding-a-recipe">
+<h2>Adding a recipe<a class="headerlink" href="#adding-a-recipe" title="Permalink to this headline">¶</a></h2>
+<p>Just like before, we’re going to let the dev team do the heavy lifting for us.
+This time, though, we’re going into the core files of the game itself (sort of).
+Go to <code class="code docutils literal notranslate"><span class="pre">data/core</span></code> and see if anything seems reasonable. There’s several
+folders, but nothing explicitly called “recipes”. That said, recipes belong
+to structures, and there is a <code class="code docutils literal notranslate"><span class="pre">data/core/structures</span></code>. Sure enough, it
+contains “crafting.xml”. Perfect! Open that up. We’re looking to
+un-craft an iron bar, so all we need to do is find the recipe for an iron bar and
+reverse it. I found it right at the top (around line 5):</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;recipe</span> <span class="na">id=</span><span class="s">&quot;smelt_iron&quot;</span> <span class="na">creates=</span><span class="s">&quot;iron_bar&quot;</span> <span class="na">type=</span><span class="s">&quot;smelter&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;item</span> <span class="na">id=</span><span class="s">&quot;iron&quot;</span> <span class="na">count=</span><span class="s">&quot;2&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/recipe&gt;</span>
+</pre></div>
+</div>
+<p>Beautiful. Let’s employ our xml skills to parse what’s going on. First off, the
+“root” of this little snippet is a recipe element. Unlike the elements we saw in
+mod.xml, this element has <strong>attributes</strong>. These are just named bits of information
+within the tag itself. For example, our recipe tag has the attribute ‘id=”smelt_iron”’.
+Again, devs did a great job with the naming, so we immediately know that this
+recipe object is identified by the game as “smelt_iron”. We also have what it creates
+(an iron bar) and the type of recipe (a smelter recipe).</p>
+<p>The recipe has its ingredients as its children, and in this case, that’s two
+pieces of iron. This is almost everything we need! The one piece “missing” is how
+many iron bars the recipe creates. If we’ve played the game, we know that this makes
+1 iron bar, but we need to make <strong>2</strong> iron ore. <strong>Recipes create 1 thing by default,</strong>
+but if we can think of a recipe that makes more than that, we’re all set. What about arrows?</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;recipe</span> <span class="na">id=</span><span class="s">&quot;craft_arrow&quot;</span> <span class="na">creates=</span><span class="s">&quot;arrow&quot;</span> <span class="na">count=</span><span class="s">&quot;2&quot;</span> <span class="na">type=</span><span class="s">&quot;workbench&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;item</span> <span class="na">id=</span><span class="s">&quot;wood&quot;</span> <span class="na">count=</span><span class="s">&quot;1&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/recipe&gt;</span>
+</pre></div>
+</div>
+<p>We’ve learned two important things. One, the recipe element can have a count tag,
+just like the item element. Two, the item element has a count of 1 specified, so
+it <em>seems</em> like it won’t default to 1…it does, but it’s important to keep an
+eye open for possible issues like that.</p>
+<p>Now we have all the info we need to “reverse” the iron-smelting recipe. Do it
+yourself and then check against mine.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;recipe</span> <span class="na">id=</span><span class="s">&quot;unsmelt_iron&quot;</span> <span class="na">creates=</span><span class="s">&quot;iron&quot;</span> <span class="na">count=</span><span class="s">&quot;2&quot;</span> <span class="na">type=</span><span class="s">&quot;smelter&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;item</span> <span class="na">id=</span><span class="s">&quot;iron_bar&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/recipe&gt;</span>
+</pre></div>
+</div>
+<p>We’re not quite done. Remember how I mentioned that recipe is the “root” of this
+snippet? It’s not the root of the whole crafting.xml document. We need to put things in a
+structure the game can understand and, for sanity’s sake, mimic the way the devs
+do things whenever possible. That means we go back to our “my_mod” folder and create
+a “structures” folder, then a “crafting.xml” inside that
+(so <code class="code docutils literal notranslate"><span class="pre">data/mods/my_mod/structures/crafting.xml</span></code>). We’ll also mimic the
+setup of the core crafting.xml–there, the iron smelting recipe is a child of
+the “recipes” element, and “recipes” is the root. Using all that together, our
+crafting.xml file looks like this:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+<span class="nt">&lt;recipes&gt;</span>
+  <span class="nt">&lt;recipe</span> <span class="na">id=</span><span class="s">&quot;unsmelt_iron&quot;</span> <span class="na">creates=</span><span class="s">&quot;iron&quot;</span> <span class="na">count=</span><span class="s">&quot;2&quot;</span> <span class="na">type=</span><span class="s">&quot;smelter&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;item</span> <span class="na">id=</span><span class="s">&quot;iron_bar&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/recipe&gt;</span>
+<span class="nt">&lt;/recipes&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="making-the-mod-do-something">
+<h2>Making the mod do something<a class="headerlink" href="#making-the-mod-do-something" title="Permalink to this headline">¶</a></h2>
+<p>The only thing left to do is make sure our mod loads this file when it initializes.
+Go back to our mod.xml and add it:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+<span class="nt">&lt;mod&gt;</span>
+    <span class="nt">&lt;name&gt;</span>Tutorial Mod<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;description&gt;</span>Adds a recipe for un-smelting iron.<span class="nt">&lt;/description&gt;</span>
+    <span class="nt">&lt;author&gt;</span>Your Name Here<span class="nt">&lt;/author&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.1.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;init&gt;</span>
+      <span class="nt">&lt;include</span> <span class="na">id=</span><span class="s">&quot;structures/crafting.xml&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/init&gt;</span>
+<span class="nt">&lt;/mod&gt;</span>
+</pre></div>
+</div>
+<p>Another quick note: the path to our crafting.xml is “relative” to the my_mod
+folder, just like the paths in this tutorial are relative to the Aground folder.
+Because my_mod’s within the Aground folder, it’s just the tutorial path minus the
+path to my_mod: <code class="code docutils literal notranslate"><span class="pre">data/mods/my_mod/structures/crafting.xml</span></code> -&gt; <code class="code docutils literal notranslate"><span class="pre">structures/crafting.xml</span></code>.</p>
+<p>We’re all set! Launch the game again and see what happens. You should have
+a brand new recipe in your smelter…congratulations on modding Aground!</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="get_started.html" class="btn btn-neutral" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, CorvBlimey.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
